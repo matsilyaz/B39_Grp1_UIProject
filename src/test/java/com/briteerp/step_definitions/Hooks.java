@@ -1,12 +1,12 @@
-package com.project_name.step_definitions;
+package com.briteerp.step_definitions;
 
 /*
     In this class we will be able to create "pre" and "post" conditions for ALL the SCENARIOS and even STEPS.
      */
 
-import com.project_name.utilities.BrowserUtils;
-import com.project_name.utilities.ConfigurationReader;
-import com.project_name.utilities.Driver;
+import com.briteerp.utilities.BrowserUtils;
+import com.briteerp.utilities.ConfigurationReader;
+import com.briteerp.utilities.Driver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
