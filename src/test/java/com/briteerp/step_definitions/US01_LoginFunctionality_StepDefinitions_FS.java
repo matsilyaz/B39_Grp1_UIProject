@@ -8,7 +8,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.JavascriptExecutor;
-import org.testng.Assert;
+import org.junit.Assert;
+import org.openqa.selenium.Keys;
 
 import java.lang.module.Configuration;
 
@@ -24,23 +25,31 @@ public class US01_LoginFunctionality_StepDefinitions_FS {
 
     @When("the user logs in as {string}")
     public void theUserLogsInAs(String roleName) {
-        String username=ConfigurationReader.getProperty(roleName+"_username");
-        String password=ConfigurationReader.getProperty(roleName+"_password");
-        loginPage.login(username,password);
+        String username=ConfigurationReader.getProperty(roleName+"_manager_username");
+        String password=ConfigurationReader.getProperty(roleName+"_manager_password");
+        loginPage.email.clear();
+        loginPage.email.sendKeys(username);
+
+        loginPage.password.clear();
+        loginPage.password.sendKeys(password);
+
+        loginPage.loginButton.click();
 
     }
 
     @Then("the user should see the Dashboard page")
     public void theUserShouldSeeTheDashboardPage() {
        String actualTitle=Driver.getDriver().getTitle();
-       Assert.assertEquals(actualTitle,"Dashboard","Login Failed!!!");
+       String expectedTitle="Odoo";
+       Assert.assertEquals(expectedTitle,actualTitle);
     }
 
     @When("the user enters valid {string} and presses the Enter key")
     public void theUserEntersValidAndPressesTheEnterKey(String RoleName) {
-        loginPage.userName.sendKeys(ConfigurationReader.getProperty(RoleName+"_username"));
-        loginPage.password.sendKeys(ConfigurationReader.getProperty(RoleName+"_password"));
+        loginPage.email.sendKeys(ConfigurationReader.getProperty(RoleName+"_manager_username"));
+        loginPage.password.sendKeys(ConfigurationReader.getProperty(RoleName+"_manager_password"));
 
+        loginPage.password.sendKeys(Keys.ENTER);
     }
 
 
@@ -58,9 +67,9 @@ public class US01_LoginFunctionality_StepDefinitions_FS {
 
     @When("the user leaves username or password field blank")
     public void theUserLeavesUsernameOrPasswordFieldBlank() {
-        loginPage.userName.sendKeys("");
+        loginPage.email.sendKeys("");
         loginPage.password.sendKeys("");
-        loginPage.submit.click();
+        loginPage.loginButton.click();
     }
 
     @Then("a message {string} should be displayed")
@@ -69,8 +78,8 @@ public class US01_LoginFunctionality_StepDefinitions_FS {
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
        String actualMessage="";
 
-       if (loginPage.userName.getAttribute("value").isEmpty()) {
-           actualMessage = (String) js.executeScript("return arguments[0].validationMessage;", loginPage.userName);
+       if (loginPage.email.getAttribute("value").isEmpty()) {
+           actualMessage = (String) js.executeScript("return arguments[0].validationMessage;", loginPage.email);
        } else if (loginPage.password.getAttribute("value").isEmpty()) {
            actualMessage = (String) js.executeScript("return arguments[0].validationMessage;", loginPage.password);
        } else {
