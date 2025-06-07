@@ -12,22 +12,34 @@ public class LoginPage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    @FindBy(id="prependedInput")
-    public WebElement userName;
+    @FindBy(id="login")
+    public WebElement email;
 
 
 
-    @FindBy(id="prependedInput2")
+    @FindBy(id="password")
     public WebElement password;
 
-    @FindBy(name = "_submit")
-    public WebElement submit;
+    @FindBy(xpath = "//button[@type='submit']")
+    public WebElement loginButton;
+
+
+    @FindBy(xpath = "//p[@class='alert alert-danger']")
+    public WebElement errorMessage;
 
 
     public void login(String userNameStr, String passwordStr) {
-        userName.sendKeys(userNameStr);
+        email.sendKeys(userNameStr);
         password.sendKeys(passwordStr);
-        submit.click();
+        loginButton.click();
         // verification that we logged
+    }
+
+    public String getErrorMessage() {
+        try {
+            return errorMessage.getText();
+        } catch (Exception e) {
+            return null; // If error message is not displayed, null is returned.
+        }
     }
 }
