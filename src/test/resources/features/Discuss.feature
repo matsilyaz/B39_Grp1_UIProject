@@ -12,7 +12,7 @@ Feature: discuss page click functionality
     When the user clicked on Calender module.
     Then the user should see the Calender module page.
 
-  @wip
+
   Scenario Outline: user should Calender module
     Given the user logged in with username as "salesmanager50@info.com" and password as "salesmanager"
     When the user clicked on "<module name>".

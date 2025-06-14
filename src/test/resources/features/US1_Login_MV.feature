@@ -1,5 +1,5 @@
 @login
-Feature: Users should be able to login
+Feature: Users(posmanager and eventscrmmanager) should be able to login
 
 
   Background: User is already in the log in page
@@ -86,6 +86,18 @@ Feature: Users should be able to login
      |                             |                  |
      | eventscrmmanager10@info.com |                  |
      |                             | eventscrmmanager |
+
+
+
+  Scenario: Logged-in user is logged out after browser back and forward navigation
+    Given the user is on the login page
+    When the user logged in as "posmanager" by clicking login button
+    And the user should see the Discuss page
+    And the user clicks the browser back button
+    And the user clicks the browser forward button
+    Then the user should be redirected to the login page
+    And the user should be logged out
+
 
 
 

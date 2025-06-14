@@ -2,12 +2,14 @@ package com.briteerp.step_definitions;
 
 
 import com.briteerp.pages.LoginPage;
+import com.briteerp.utilities.BrowserUtils;
 import com.briteerp.utilities.ConfigurationReader;
 import com.briteerp.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
 public class LoginStepDefinitions {
@@ -123,6 +125,30 @@ public class LoginStepDefinitions {
 
 
     }
+
+    @When("the user clicks the browser back button")
+    public void the_user_clicks_the_browser_back_button() {
+        BrowserUtils.waitForPageToLoad(5);
+      Driver.getDriver().navigate().back();
+    }
+    @When("the user clicks the browser forward button")
+    public void the_user_clicks_the_browser_forward_button() {
+    BrowserUtils.waitForPageToLoad(5);
+    Driver.getDriver().navigate().forward();
+    }
+    @Then("the user should be redirected to the login page")
+    public void the_user_should_be_redirected_to_the_login_page() {
+        String expectedURL = ConfigurationReader.getProperty("url");
+        String actualURL = Driver.getDriver().getCurrentUrl();
+        Assert.assertEquals("USER IS NOT ON THE LOGIN PAGE!!! ",expectedURL,actualURL);
+    }
+    @Then("the user should be logged out")
+    public void the_user_should_be_logged_out() {
+        boolean isMailFieldPresent = Driver.getDriver().findElements(By.id("login")).size() > 0;
+        Assert.assertTrue("There isn't any mail field!!!",isMailFieldPresent);
+
+    }
+
 
 
 
