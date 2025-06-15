@@ -23,73 +23,76 @@ public class US01_LoginFunctionality_StepDefinitions_FS {
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
     }
 
-    @When("the user logs in as {string}")
-    public void theUserLogsInAs(String roleName) {
-        String username=ConfigurationReader.getProperty(roleName+"_manager_username");
-        String password=ConfigurationReader.getProperty(roleName+"_manager_password");
-        loginPage.email.clear();
-        loginPage.email.sendKeys(username);
 
-        loginPage.password.clear();
-        loginPage.password.sendKeys(password);
 
-        loginPage.loginButton.click();
+    @When("the user enters {string} and {string}")
+    public void theUserEntersAnd(String email, String password) {
+        LoginPage loginPage=new LoginPage();
+        loginPage.login(email, password);
+    }
+
+    @Then("the user should see the Discuss page")
+    public void theUserShouldSeeTheDiscussPage() {
+        String expectedTitle = ConfigurationReader.getProperty("discuss_page_title");
+        String actualTitle=Driver.getDriver().getTitle();
+        System.out.println("actualTitle = " + actualTitle);
+        Assert.assertEquals(expectedTitle,actualTitle);
 
     }
 
-    @Then("the user should see the Dashboard page")
-    public void theUserShouldSeeTheDashboardPage() {
-       String actualTitle=Driver.getDriver().getTitle();
-       String expectedTitle="Odoo";
-       Assert.assertEquals(expectedTitle,actualTitle);
-    }
 
-    @When("the user enters valid {string} and presses the Enter key")
-    public void theUserEntersValidAndPressesTheEnterKey(String RoleName) {
-        loginPage.email.sendKeys(ConfigurationReader.getProperty(RoleName+"_manager_username"));
-        loginPage.password.sendKeys(ConfigurationReader.getProperty(RoleName+"_manager_password"));
 
-        loginPage.password.sendKeys(Keys.ENTER);
+    @When("the user enters {string} and {string} and presses Enter")
+    public void theUserEntersAndAndPressesEnter(String email, String password) {
+        LoginPage loginPage = new LoginPage();
+        loginPage.loginWithEnterKey(email, password);
     }
 
 
-    @When("the user enters invalid credentials")
-    public void theUserEntersInvalidCredentials() {
-        loginPage.login("invalid_username", "invalid_password");
+
+    @When("the user enters invalid {string} and {string}")
+    public void theUserEntersInvalidAnd(String email, String password) {
+        loginPage.login(email, password);
+
     }
+
 
 
     @Then("an error message {string} should be displayed")
     public void anErrorMessageShouldBeDisplayed(String expectedMessage) {
-        String actualMessage= loginPage.getErrorMessage();
-        Assert.assertEquals(actualMessage,expectedMessage);
+
+        String actualMessage = loginPage.getErrorMessage();
+        Assert.assertEquals(expectedMessage, actualMessage);
     }
 
-    @When("the user leaves username or password field blank")
-    public void theUserLeavesUsernameOrPasswordFieldBlank() {
-        loginPage.email.sendKeys("");
-        loginPage.password.sendKeys("");
-        loginPage.loginButton.click();
+    @When("the user tries to login with email {string} and password {string}")
+    public void theUserTriesToLoginWithEmailAndPassword(String email, String password) {
+        loginPage.login(email, password);
+
     }
 
     @Then("a message {string} should be displayed")
     public void aMessageShouldBeDisplayed(String expectedMessage) {
 
-        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
-       String actualMessage="";
 
-       if (loginPage.email.getAttribute("value").isEmpty()) {
-           actualMessage = (String) js.executeScript("return arguments[0].validationMessage;", loginPage.email);
-       } else if (loginPage.password.getAttribute("value").isEmpty()) {
-           actualMessage = (String) js.executeScript("return arguments[0].validationMessage;", loginPage.password);
-       } else {
-           Assert.fail("Both fields are filled. Can not check validation message.");
-       }
+        // email
+        String validationMessage = loginPage.email.getAttribute("validationMessage");
 
-        Assert.assertEquals(expectedMessage, actualMessage);
-       }
+        // password
+        if (validationMessage == null || validationMessage.isEmpty()) {
+            validationMessage = loginPage.password.getAttribute("validationMessage");
+        }
 
+        Assert.assertEquals(expectedMessage, validationMessage);
+        System.out.println("User sees the message");
     }
+
+
+
+
+
+
+}
 
 
 
