@@ -21,45 +21,20 @@ public class ProductPage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-
     @FindBy(xpath ="//span[text()[normalize-space()='Inventory']]" )
     public WebElement inventoryButton;
-
 
     @FindBy(xpath ="(//span[text()[normalize-space()='Products']])[6]" )
     public WebElement productsButton;
 
-//    @FindBy(xpath = "//div/button[@class='btn btn-primary btn-sm o-kanban-button-new btn-default']")//doğru
-//    public WebElement createButton;
-
     @FindBy(xpath = "//button[text()[normalize-space()='Create']]")//doğru
    public WebElement createButton;
 
-
-
-//    @FindBy(xpath = "(//input[@type='text'])[4]")
-//    public WebElement productName;
-
-        @FindBy(xpath = "//input[@placeholder='Product Name']")
+    @FindBy(xpath = "//input[@placeholder='Product Name']")
     public WebElement productName;
 
     @FindBy(xpath = "//span[@name='name']")
     public WebElement actualProductName;
-
-//    @FindBy(xpath = "//input[@placeholder='Product Name' and contains(@class, 'o_field_char') and @type='text']")
-//    public WebElement productName;
-
-
-//
-//    @FindBy(xpath = "//div/h1/input[@placeholder='Product Name']")
-//    public WebElement productName;
-
-//   @FindBy(xpath = "//h1/input[@name='name']")
-//    public WebElement productName;
-
-//    @FindBy(xpath = "//input[@class='o_field_char o_field_widget o_input o_required_modifier']")
-//    public WebElement productName;
-
 
     @FindBy(xpath = "//button[@class='btn btn-primary btn-sm o_form_button_save']")
     public WebElement saveButton;
@@ -80,13 +55,8 @@ public class ProductPage {
         return null;
     }
 
-//    @FindBy(xpath = "(//div/button[@type='button'])[5]")
-//    public WebElement editButton;
-
     @FindBy(xpath = "//button[normalize-space(text())='Edit']")
     public WebElement editButton;
-
-
 
     @FindBy(xpath = "//div[@class='oe_kanban_global_click o_kanban_record']")
     public List<WebElement> productList; //birden fazla var bu nedenle list webelement.
@@ -105,7 +75,6 @@ public class ProductPage {
         BrowserUtils.waitForVisibility(product, 10);
         BrowserUtils.scrollToElement(product);
         BrowserUtils.waitForClickablility(product, 10);
-
         try {
             product.click();
         } catch (Exception e) {
@@ -126,12 +95,6 @@ public class ProductPage {
 
     @FindBy(xpath = "//a[.='General Information']")
     public WebElement generalInformation;
-
-//    @FindBy(xpath = "//a[.='Sales']")
-//    public WebElement sales;
-
-//    @FindBy(xpath = "//a[.='Purchase']")
-//    public WebElement purchase;
 
     @FindBy(xpath = "//a[.='Inventory']")
     public WebElement inventory;
@@ -174,9 +137,4 @@ public class ProductPage {
 
     @FindBy(xpath = "(//button[@data-toggle='dropdown'])[7]")
     public WebElement moreButton;
-
-
-
-
-
 }
