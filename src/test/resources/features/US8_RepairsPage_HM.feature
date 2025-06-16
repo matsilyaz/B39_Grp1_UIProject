@@ -28,6 +28,7 @@ Feature:Repairs Page Functionality for POS and Sales Managers
       | salesmanager52@info.com | salesmanager |
       | salesmanager78@info.com | salesmanager |
       | salesmanager90@info.com | salesmanager |
+      | salesmanager90@info.com | salesmanager |
 
   @halime
   Scenario Outline: Search and verify repair record as POS or Sales Manager

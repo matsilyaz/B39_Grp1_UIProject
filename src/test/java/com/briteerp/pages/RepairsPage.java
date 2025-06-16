@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.lang.module.ResolutionException;
 import java.util.List;
 
 public class RepairsPage {
@@ -74,7 +75,7 @@ public class RepairsPage {
             String actual = columnHeaders.get(i).getText().trim();
             String expected = expectedHeaders.get(i).trim();
 
-            System.out.println("Expected: " + expected + " | Actual: " + actual);  // Hata ayıklamak için
+            System.out.println("Expected : " + expected + " | Actual: " + actual);  // Hata ayıklamak için
             Assert.assertEquals("Column header at index " + i + " doesn't match!", expected, actual);
         }
     }

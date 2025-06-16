@@ -39,7 +39,7 @@ public class US8_RepairPage_StepDefinition {
         wait.until(ExpectedConditions.titleIs("#Inbox - Odoo"));
         BrowserUtils.waitForPageToLoad(5);
         BrowserUtils.verifyTitle("#Inbox - Odoo");
-
+        System.out.println(" ----------------------------");
     }
 
     @When("user clicks on the  Repairs Page")//3
