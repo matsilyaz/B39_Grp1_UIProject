@@ -47,7 +47,7 @@ public class US8_RepairPage_StepDefinition {
         BrowserUtils.waitForPageToLoad(5);
         BrowserUtils.waitForClickablility(discussPage.repairsModule, 10);
         discussPage.navigateToModule("Repairs");
-
+        System.out.println("---");
 
     }
 

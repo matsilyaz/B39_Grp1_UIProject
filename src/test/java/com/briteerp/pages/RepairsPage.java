@@ -1,7 +1,9 @@
 package com.briteerp.pages;
 
+import com.briteerp.utilities.BrowserUtils;
 import com.briteerp.utilities.Driver;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -25,13 +27,13 @@ public class RepairsPage {
      *
      * @param columns
      */
-   /* public void navigateToColumns(String columns) {
+   public void navigateToColumns(String columns) {
 
         String columnsLocator = "//span[normalize-space(text())='" + columns + "']";
 
         BrowserUtils.waitForClickablility(By.xpath(columnsLocator), 5);
         Driver.getDriver().findElement(By.xpath(columnsLocator)).click();
-    }*/
+    }
 
     @FindBy(xpath = "//th[.='Repair Reference']")
     public WebElement RepairReferenceColumns;
@@ -74,8 +76,8 @@ public class RepairsPage {
         for (int i = 0; i < expectedHeaders.size(); i++) {
             String actual = columnHeaders.get(i).getText().trim();
             String expected = expectedHeaders.get(i).trim();
-
-            System.out.println("Expected : " + expected + " | Actual: " + actual);  // Hata ayıklamak için
+            System.out.println("-----");
+            System.out.println("Expected  : " + expected + " | Actual: " + actual);  // Hata ayıklamak için
             Assert.assertEquals("Column header at index " + i + " doesn't match!", expected, actual);
         }
     }
