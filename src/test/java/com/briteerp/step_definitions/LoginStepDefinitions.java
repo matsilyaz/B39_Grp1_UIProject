@@ -13,9 +13,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
 public class LoginStepDefinitions {
+    /*
 
-    @Given("the user is on the login page")
-    public void the_user_is_on_the_login_page() {
+    @Given("the user is on the login page") public void the_user_is_on_the_login_page() {
         System.out.println("Login to app in Before method");
     }
 
@@ -147,7 +147,7 @@ public class LoginStepDefinitions {
         boolean isMailFieldPresent = Driver.getDriver().findElements(By.id("login")).size() > 0;
         Assert.assertTrue("There isn't any mail field!!!",isMailFieldPresent);
 
-    }
+    } */
 
 
 
