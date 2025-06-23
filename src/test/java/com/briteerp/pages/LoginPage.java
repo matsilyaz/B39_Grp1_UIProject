@@ -49,4 +49,13 @@ public class LoginPage {
         email.sendKeys(userNameStr);
         password.sendKeys(passwordStr + Keys.ENTER);
     }
+    public String getErrorMessage() {
+        try {
+
+            return errorMessage.getText();
+        }catch (Exception e){
+            return null;
+        }
+
+    }
 }
